@@ -1,13 +1,19 @@
 import { useState } from "react";
 
-const CurrencyForm =() => {
+const CurrencyForm =({bankInfo, onClose}) => {
     // 환율 금액 입력 useState
     const [inputMoney, setInputMoney] = useState('');
+    const [fromNation, setFromNation] = useState(bankInfo.from);
+    const [toNation, setToNation] = useState(bankInfo.to);
 
     // 환율 금액 핸들링 함수
     const handleInputMoney = (e) => {
         setInputMoney(e.target.value);
     } 
+
+    function getNationEmblem(nationCode) {
+        return `https://hatscripts.github.io/circle-flags/flags/${nationCode}.svg`;
+    }
 
     return(
         <>
@@ -18,12 +24,13 @@ const CurrencyForm =() => {
                     <div className="flex gap-4 items-center">
                         <img 
                             class="w-10 h-10 rounded-full object-cover object-cover"
-                            src="https://picsum.photos/id/237/200/300" alt="" />
-                        <select className="border border-black bg-white h-10" defaultValue="" name="" id="">
+                            src={getNationEmblem(fromNation)} alt="" />
+                        <select className="border border-black bg-white h-10" name="" id=""
+                                defaultValue={bankInfo.from} onChange={(event) => setFromNation(event.target.value)}>
                             <option value="" disabled hidden>-------</option>
-                            <option value="">국가1</option>
-                            <option value="">국가2</option>
-                            <option value="">국가3</option>
+                            <option value="kr">원</option>
+                            <option value="us">달러</option>
+                            <option value="eu">유로</option>
                         </select>
                         <input 
                             type="number"
@@ -47,12 +54,13 @@ const CurrencyForm =() => {
                     <div className="flex gap-4">
                         <img 
                             class="w-10 h-10 rounded-full object-cover object-cover"
-                            src="https://picsum.photos/id/237/200/300" alt="" />
-                        <select className="border border-black bg-white" defaultValue="" name="" id="">
+                            src={getNationEmblem(toNation)} alt="" />
+                        <select className="border border-black bg-white" name="" id=""
+                                defaultValue={bankInfo.to} onChange={(event) => setToNation(event.target.value)}>
                             <option value="" disabled hidden>-------</option>
-                            <option value="">국가1</option>
-                            <option value="">국가2</option>
-                            <option value="">국가3</option>
+                            <option value="kr">원</option>
+                            <option value="us">달러</option>
+                            <option value="eu">유로</option>
                         </select>
                         <input 
                             type="number"

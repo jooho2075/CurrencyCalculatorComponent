@@ -10,7 +10,7 @@ function App() {
     <div>
       <HomeLayout>
         <h1>BANK LIST</h1>
-        <CurrencyForm/>
+        
       </HomeLayout>
     </div>  
   )

@@ -2,6 +2,7 @@ import DefaultLayout from './layouts/DefaultLayout'
 import Home from './components/Home'
 import HomeLayout from './layouts/HomeLayout'
 import Modal from './components/ui/Modal'
+import CurrencyForm from './components/CurrencyForm'
 
 const banks = [
   {

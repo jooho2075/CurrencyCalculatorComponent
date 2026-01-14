@@ -140,12 +140,12 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
                     <input
                       type="text"
                       readOnly
-                      value={totalMoney === 0 ? "0" : totalMoney.toFixed(2)}
+                      value={totalMoney%1 == 0 ? totalMoney.toFixed(0) : totalMoney.toFixed(2)}
                       className="pl-5 w-full border-blue-300 text-blue-600 text-lg mb-1 outline-none text-left bg-transparent"
                         />
                 </div>
                 <p className="text-xs text-blue-600 text-left pl-5 mb-4">
-                    {totalMoney === 0 ? "0" : totalMoney.toFixed(2)} {NATION_CURRENCY_NAME[toNation]}
+                    {totalMoney%1 == 0 ? totalMoney.toFixed(0) : totalMoney.toFixed(2)} {NATION_CURRENCY_NAME[toNation]}
                 </p>
                 <br/>
                 {/* Close Button */}

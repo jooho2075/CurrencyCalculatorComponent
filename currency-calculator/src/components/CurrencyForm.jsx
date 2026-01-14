@@ -2,11 +2,11 @@ import { useState } from "react";
 import { NATION_CURRENCY_CODE } from "../constants/NATION_CURRENCY_CODE";
 import { NATION_CURRENCY_NAME } from "../constants/NATION_CURRENCY_NAME";
 
-const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
+const CurrencyForm =({from, to, onClose, rate, bgColor}) => {
     // 환율 금액 입력 useState
     const [inputMoney, setInputMoney] = useState('');
-    const [fromNation, setFromNation] = useState(bankInfo.from);
-    const [toNation, setToNation] = useState(bankInfo.to);
+    const [fromNation, setFromNation] = useState(from);
+    const [toNation, setToNation] = useState(to);
     const [totalMoney, setTotalMoney] = useState(0);
     
     // 환율 금액 핸들링 함수
@@ -50,7 +50,7 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
                     />
                     <select
                       className="w-15 bg-transparent outline-none text-lg font-medium"
-                      defaultValue={bankInfo.from}
+                      defaultValue={from}
                       onChange={(event) => {
                         const newNation = event.target.value;
                         setFromNation(newNation);
@@ -111,7 +111,7 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
                     />
                     <select
                         className="w-15 bg-transparent outline-none text-lg font-medium"
-                        defaultValue={bankInfo.to}
+                        defaultValue={to}
                         onChange={(event) => {
                             const newNation = event.target.value;
                             setToNation(newNation);

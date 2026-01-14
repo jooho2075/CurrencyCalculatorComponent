@@ -22,7 +22,8 @@ const BankButton = ({ bank, rate }) => {
       {openModal && createPortal(
         <Modal onClose={closeModal}>
           <CurrencyForm
-            bankInfo={bank}
+            from={bank.from}
+            to={bank.to}
             bgColor={BANK_COLOR_CODE[bank.title]}
             rate={rate}
             onClose={() => open(false)}

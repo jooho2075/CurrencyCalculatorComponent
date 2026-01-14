@@ -1,15 +1,33 @@
 import { useState } from "react";
+import { NATION_CURRENCY_CODE } from "../constants/NATION_CURRENCY_CODE";
 
-const CurrencyForm = ({ bankInfo, onClose }) => {
+const CurrencyForm =({bankInfo, onClose, rate}) => {
     // 환율 금액 입력 useState
     const [inputMoney, setInputMoney] = useState('');
     const [fromNation, setFromNation] = useState(bankInfo.from);
     const [toNation, setToNation] = useState(bankInfo.to);
-
+    const [totalMoney, setTotalMoney] = useState(0);
+    console.log(toNation, "의 환율은 ", rate[NATION_CURRENCY_CODE[toNation]]);
+    
     // 환율 금액 핸들링 함수
     const handleInputMoney = (e) => {
-        setInputMoney(e.target.value);
-    }
+        const value = e.target.value;
+        setInputMoney(value);
+
+        if (!value) {
+            setTotalMoney(0);
+            return;
+        }
+
+        const rateFrom = rate[NATION_CURRENCY_CODE[fromNation]];
+        const rateTo = rate[NATION_CURRENCY_CODE[toNation]];
+
+        const exchangeRate = rateTo / rateFrom; // number
+        const result = Number(value) * exchangeRate;
+        console.log("계산결과는 : ", rateTo);
+
+        setTotalMoney(result);
+    } 
 
     function getNationEmblem(nationCode) {
         return `https://hatscripts.github.io/circle-flags/flags/${nationCode}.svg`;

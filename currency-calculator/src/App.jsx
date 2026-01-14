@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import DefaultLayout from './layouts/DefaultLayout'
+import CurrencyForm from './components/CurrencyForm'
 import HomeLayout from './layouts/HomeLayout'
 
 function App() {
@@ -8,8 +10,8 @@ function App() {
     <div>
       <HomeLayout>
         <h1>BANK LIST</h1>
+        <CurrencyForm/>
       </HomeLayout>
-
     </div>  
   )
 }

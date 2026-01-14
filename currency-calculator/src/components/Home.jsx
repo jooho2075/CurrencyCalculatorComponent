@@ -1,10 +1,8 @@
-import Modal from "../components/ui/Modal"
-import CurrencyForm from "./CurrencyForm";
 import BankButton from "./BankButton";
 import { useEffect, useState } from "react";
 
 
-const Home = ({ bank_list }) => {
+const Home = ({ bankList }) => {
     const [todayRate, setTodayRate] = useState(null);
 
     const getTodayCurrency = async() => {
@@ -22,7 +20,7 @@ const Home = ({ bank_list }) => {
 
     if (!todayRate) return <p>로딩 중...</p>;
 
-    const bankButtons = bank_list.map(bank => <BankButton bank={bank} rate={todayRate}/>);
+    const bankButtons = bankList.map(bank => <BankButton bank={bank} rate={todayRate}/>);
 
     return (
         <>

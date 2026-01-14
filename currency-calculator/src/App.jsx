@@ -1,10 +1,16 @@
 import { useState } from 'react'
+import HomeLayout from './layouts/HomeLayout'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div></div>  
+    <div>
+      <HomeLayout>
+        <h1>BANK LIST</h1>
+      </HomeLayout>
+
+    </div>  
   )
 }
 

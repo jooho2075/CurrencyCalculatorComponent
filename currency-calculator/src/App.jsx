@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import DefaultLayout from './layouts/DefaultLayout'
+import CurrencyForm from './components/CurrencyForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -7,7 +8,7 @@ function App() {
   return (
     <div>
       <DefaultLayout>
-        <h1>안녕하세요</h1>
+        <CurrencyForm/>
       </DefaultLayout>
     </div>  
   )

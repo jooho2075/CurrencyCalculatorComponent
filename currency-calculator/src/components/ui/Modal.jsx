@@ -1,7 +1,7 @@
 const Modal = () => {
     return(
         <>
-        Modal창 입니다.
+            <h1>모달창입니다.</h1>
         </>
     )
 }

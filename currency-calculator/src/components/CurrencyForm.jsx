@@ -35,85 +35,114 @@ const CurrencyForm =({bankInfo, onClose, rate}) => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center bg-gray-50 p-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+    <div className="rounded-2xl min-h-[60vh] bg-blue-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-xs bg-white rounded-2xl shadow-md p-6">
+        <h1 className="text-xl font-semibold text-center mb-6">환전금액</h1>
 
-                <h1 className="text-2xl font-bold mb-8 text-center">환율 계산기</h1>
-                
-                <form className="flex flex-col">
-                    <div className="mb-6">
-                        <p className="mb-2 font-medium">환전금액</p>
-                        <div className="flex gap-3 items-center">
-                            <img 
-                                className="w-10 h-10 rounded-full object-cover shadow-sm"
-                                src={getNationEmblem(fromNation)} alt="from nation" />
-                            <select 
-                                className="border border-gray-300 rounded bg-white h-10 px-2 outline-none focus:border-black" 
-                                defaultValue={bankInfo.from} 
-                                onChange={(event) => setFromNation(event.target.value)}>
-                                <option value="" disabled hidden>-------</option>
-                                <option value="kr">원</option>
-                                <option value="us">달러</option>
-                                <option value="eu">유로</option>
-                            </select>
-                            <input 
-                                type="number"
-                                value={inputMoney}
-                                onChange={handleInputMoney}
-                                className="flex-1 border border-gray-300 outline-none px-3 py-1 h-10 rounded
-                                           [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none 
-                                           [&::-webkit-inner-spin-button]:appearance-none
-                                           bg-white focus:border-black transition-all"
-                            />
-                        </div>
-                        <p className="text-sm mt-2">
-                            {inputMoney ? Number(inputMoney).toLocaleString() : 0} {NATION_CURRENCY_NAME[fromNation]}
-                        </p>
-                    </div>
+        {/* From Section */}
+        <div className="flex items-center border border-gray-300 rounded-xl p-3 mb-2 bg-white gap-3">
+  <img
+    className="w-8 h-8 rounded-full object-cover"
+    src={getNationEmblem(fromNation)}
+    alt="from flag"
+  />
+  <select
+    className="w-15 bg-transparent outline-none text-lg font-medium"
+    defaultValue={bankInfo.from}
+    onChange={(event) => setFromNation(event.target.value)}
+  >
+    <option value="" disabled hidden>-------</option>
+    <option value="kr">KRW</option>
+    <option value="us">USD</option>
+    <option value="eu">EUR</option>
+    <option value="jp">JPY</option>
+    <option value="cn">CNY</option>
+    <option value="gb">GBP</option>
+    <option value="ca">CAD</option>
+    <option value="au">AUD</option>
+    <option value="vn">VND</option>
+    <option value="th">THB</option>
+    <option value="ph">PHP</option>
+    <option value="tw">TWD</option>
+  </select>
 
-                    <div className="mb-8">
-                        <p className="mb-2 font-medium">환전 예상 금액</p>
-                        <div className="flex gap-3 items-center">
-                            <img 
-                                className="w-10 h-10 rounded-full object-cover shadow-sm"
-                                src={getNationEmblem(toNation)} alt="to nation" />
-                            <select 
-                                className="border border-gray-300 rounded bg-white h-10 px-2 outline-none focus:border-black" 
-                                defaultValue={bankInfo.to} 
-                                onChange={(event) => setToNation(event.target.value)}>
-                                <option value="" disabled hidden>-------</option>
-                                <option value="kr">원</option>
-                                <option value="us">달러</option>
-                                <option value="eu">유로</option>
-                            </select>
-                            <input 
-                                type="number"
-                                readOnly
-                                value={totalMoney == "0" ? "0" : totalMoney.toFixed(2)}
-                                className="flex-1 border border-gray-300 outline-none px-3 py-1 h-10 rounded
-                                           [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none 
-                                           [&::-webkit-inner-spin-button]:appearance-none
-                                           bg-white focus:border-black transition-all" 
-                            />
-                        </div>
-                        {/* <p className="text-sm mt-2 font-semibold">
-                            결과 : {totalMoney}
-                        </p> */}
-                    </div>
+  <input
+  type="number"
+  value={inputMoney}
+  onChange={handleInputMoney}
+  placeholder="금액 입력"
+  className="pl-2 flex-1 border-blue-300 text-blue-600 text-lg outline-none text-left bg-transparent
+             appearance-none 
+             [&::-webkit-outer-spin-button]:appearance-none 
+             [&::-webkit-inner-spin-button]:appearance-none
+             [&::-moz-appearance]:textfield"
+/>
+</div>
 
-                    <div className="flex justify-center">
-                        <button
-                            type="button"
-                            onClick={onClose} 
-                            className="border border-black bg-black text-white hover:bg-gray-800 transition-colors 
-                                    rounded-lg w-full h-12 font-medium">
-                                닫기
-                        </button>
-                    </div>
-                </form>
-            </div>
+        
+        <p className="text-xs text-blue-600 text-left pl-5 mb-4">
+          {inputMoney || 0} {NATION_CURRENCY_NAME[fromNation]}
+        </p>
+
+        {/* = Divider */}
+        <div className="flex justify-center my-4">
+          <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-400 text-white">
+            =
+          </div>
         </div>
-    )
+        <br/>
+
+        {/* To Section */}
+        <div className="flex items-center border border-gray-300 rounded-xl p-3 mb-2 bg-white">
+          <img
+            className="w-8 h-8 rounded-full object-cover mr-3"
+            src={getNationEmblem(toNation)}
+            alt="to flag"
+          />
+          <select
+        //   "w-15 bg-transparent outline-none text-lg font-medium"
+            className="w-15 bg-transparent outline-none text-lg font-medium"
+            defaultValue={bankInfo.to}
+            onChange={(event) => setToNation(event.target.value)}
+          >
+            <option value="" disabled hidden>-------</option>
+            <option value="kr">KRW</option>
+            <option value="us">USD</option>
+            <option value="eu">EUR</option>
+            <option value="jp">JPY</option>
+            <option value="cn">CNY</option>
+            <option value="gb">GBP</option>
+            <option value="ca">CAD</option>
+            <option value="au">AUD</option>
+            <option value="vn">VND</option>
+            <option value="th">THB</option>
+            <option value="ph">PHP</option>
+            <option value="tw">TWD</option>
+          </select>
+
+        <input
+          type="text"
+          readOnly
+          value={totalMoney === 0 ? "0" : totalMoney.toFixed(2)}
+          className="pl-5 w-full border-blue-300 text-blue-600 text-lg mb-1 outline-none text-left bg-transparent"
+          />
+          </div>
+        {/* <p className="text-xs text-blue-600 text-left pl-5 mb-6">
+          {Number(totalMoney).toLocaleString()} {NATION_CURRENCY_NAME[toNation]}
+        </p> */}
+        <br/>
+        <br/>
+        {/* Close Button */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="w-full bg-black text-white rounded-lg h-11 font-semibold hover:bg-gray-800 transition-colors"
+        >
+          닫기
+        </button>
+      </div>
+    </div>
+);
 }
 
 export default CurrencyForm;

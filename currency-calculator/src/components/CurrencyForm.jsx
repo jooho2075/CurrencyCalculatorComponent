@@ -8,7 +8,7 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
     const [fromNation, setFromNation] = useState(bankInfo.from);
     const [toNation, setToNation] = useState(bankInfo.to);
     const [totalMoney, setTotalMoney] = useState(0);
-
+    
     // 환율 금액 핸들링 함수
     const handleInputMoney = (e) => {
         const value = e.target.value;
@@ -19,6 +19,10 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
             return;
         }
 
+        changeTotalMoney(value);
+    } 
+
+    function changeTotalMoney(value) {
         const rateFrom = rate[NATION_CURRENCY_CODE[fromNation]];
         const rateTo = rate[NATION_CURRENCY_CODE[toNation]];
 
@@ -26,7 +30,7 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
         const result = Number(value) * exchangeRate;
 
         setTotalMoney(result);
-    } 
+    }
 
     function getNationEmblem(nationCode) {
         return `https://hatscripts.github.io/circle-flags/flags/${nationCode}.svg`;
@@ -47,7 +51,16 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
                     <select
                       className="w-15 bg-transparent outline-none text-lg font-medium"
                       defaultValue={bankInfo.from}
-                      onChange={(event) => setFromNation(event.target.value)}
+                      onChange={(event) => {
+                        const newNation = event.target.value;
+                        setFromNation(newNation);
+                        if (inputMoney) {
+                            const rateFrom = rate[NATION_CURRENCY_CODE[newNation]];
+                            const rateTo = rate[NATION_CURRENCY_CODE[toNation]];
+                            const exchangeRate = rateTo / rateFrom;
+                            setTotalMoney(Number(inputMoney) * exchangeRate);
+                        }
+                      }}
                     >
                         <option value="kr">KRW</option>
                         <option value="us">USD</option>
@@ -99,7 +112,16 @@ const CurrencyForm =({bankInfo, onClose, rate, bgColor}) => {
                     <select
                         className="w-15 bg-transparent outline-none text-lg font-medium"
                         defaultValue={bankInfo.to}
-                        onChange={(event) => setToNation(event.target.value)}
+                        onChange={(event) => {
+                            const newNation = event.target.value;
+                            setToNation(newNation);
+                            if (inputMoney) {
+                                const rateFrom = rate[NATION_CURRENCY_CODE[fromNation]];
+                                const rateTo = rate[NATION_CURRENCY_CODE[newNation]];
+                                const exchangeRate = rateTo / rateFrom;
+                                setTotalMoney(Number(inputMoney) * exchangeRate);
+                            }
+                        }}
                     > 
                         <option value="kr">KRW</option>
                         <option value="us">USD</option>

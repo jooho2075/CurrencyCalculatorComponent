@@ -1,11 +1,31 @@
-import { useState } from 'react'
 import DefaultLayout from './layouts/DefaultLayout'
 import Home from './components/Home'
 import HomeLayout from './layouts/HomeLayout'
 import Modal from './components/ui/Modal'
 import CurrencyForm from './components/CurrencyForm'
 
-const banks = ['Woori', 'Shinhan','KB','NH','Hana', ]
+const banks = [
+  {
+    id: 1,
+    title: 'Woori'
+  }, 
+  {
+    id:2,
+    title: 'Shinhan'
+  },
+  { 
+    id:3,
+    title: 'KB'
+  },
+  {
+    id:4,
+    title: 'NH'
+  },
+  {
+    id:5,
+    title: 'Hana'
+  } 
+]
 
 function App() {
 
@@ -18,7 +38,7 @@ function App() {
         <Home bank_list={banks}/>
       </HomeLayout>
       {/* <CurrencyForm/> */}
-      <Modal/>
+      {/* <Modal onClose={()=>open(false)}/> */}
     </div>  
   )
 }

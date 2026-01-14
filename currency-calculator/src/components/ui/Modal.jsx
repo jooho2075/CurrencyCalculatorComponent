@@ -4,17 +4,22 @@ const Modal = ({ children, onClose }) => {
 
   return (
     <>
-        {/* Modal 배경 흐릿한(blur) 부분 */}
-        <div data-cy="modal-backdrop" 
-            className='fixed top-0 left-0 w-full h-full backdrop-blur-md z-1'
-            onClick={onClose}></div>
+      {/* Modal backdrop */}
+      <div
+        data-cy="modal-backdrop"
+        className="fixed top-0 left-0 w-full h-full bg-black/20 backdrop-blur-md z-10"
+        onClick={onClose}
+      />
 
-        {/* Modal dialog 부분 */}
-        <div className='fixed z-10 w-1/2 p-8 m-0 transform -translate-x-1/2 -translate-y-1/2 border-none rounded shadow-xl top-1/2 left-1/2 bg-slate-500'>
-            {children}
-        </div>
+      {/* Modal content */}
+      <div
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                   bg-white p-6 rounded-2xl shadow-xl z-20 w-[420px] max-w-[90%]"
+      >
+        {children}
+      </div>
     </>
-  )
+  );
 }
 
 export default Modal;

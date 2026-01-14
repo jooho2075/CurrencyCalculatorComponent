@@ -1,7 +1,11 @@
+import CurrencyForm from "../CurrencyForm";
+
 const Modal = () => {
     return(
         <>
-            <h1>모달창입니다.</h1>
+        <div className="w-96 bg-sky-400 rounded-lg">
+            <CurrencyForm/>
+        </div>
         </>
     )
 }

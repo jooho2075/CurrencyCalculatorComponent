@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NATION_CURRENCY_CODE } from "../constants/NATION_CURRENCY_CODE";
+import { NATION_CURRENCY_NAME } from "../constants/NATION_CURRENCY_NAME";
 
 const CurrencyForm =({bankInfo, onClose, rate}) => {
     // 환율 금액 입력 useState
@@ -8,7 +9,7 @@ const CurrencyForm =({bankInfo, onClose, rate}) => {
     const [toNation, setToNation] = useState(bankInfo.to);
     const [totalMoney, setTotalMoney] = useState(0);
     console.log(toNation, "의 환율은 ", rate[NATION_CURRENCY_CODE[toNation]]);
-    
+
     // 환율 금액 핸들링 함수
     const handleInputMoney = (e) => {
         const value = e.target.value;
@@ -66,12 +67,12 @@ const CurrencyForm =({bankInfo, onClose, rate}) => {
                             />
                         </div>
                         <p className="text-sm mt-2">
-                            입력금액 : {inputMoney ? Number(inputMoney).toLocaleString() : 0}
+                            {inputMoney ? Number(inputMoney).toLocaleString() : 0} {NATION_CURRENCY_NAME[fromNation]}
                         </p>
                     </div>
 
                     <div className="mb-8">
-                        <p className="mb-2 font-medium">한화(\)</p>
+                        <p className="mb-2 font-medium">환전 예상 금액</p>
                         <div className="flex gap-3 items-center">
                             <img 
                                 className="w-10 h-10 rounded-full object-cover shadow-sm"
@@ -87,15 +88,17 @@ const CurrencyForm =({bankInfo, onClose, rate}) => {
                             </select>
                             <input 
                                 type="number"
+                                readOnly
+                                value={totalMoney == "0" ? "0" : totalMoney.toFixed(2)}
                                 className="flex-1 border border-gray-300 outline-none px-3 py-1 h-10 rounded
                                            [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none 
                                            [&::-webkit-inner-spin-button]:appearance-none
                                            bg-white focus:border-black transition-all" 
                             />
                         </div>
-                        <p className="text-sm mt-2 font-semibold">
-                            결과 : 0
-                        </p>
+                        {/* <p className="text-sm mt-2 font-semibold">
+                            결과 : {totalMoney}
+                        </p> */}
                     </div>
 
                     <div className="flex justify-center">

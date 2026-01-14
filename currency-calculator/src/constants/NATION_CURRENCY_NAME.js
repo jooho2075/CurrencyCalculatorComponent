@@ -1,6 +1,6 @@
 export const NATION_CURRENCY_NAME = {
   kr: "원",            // 한국
-  us: "달러",          // 미국
+  us: "미국 달러",          // 미국
   eu: "유로",          // 유로
   jp: "엔",            // 일본
   cn: "위안화",        // 중국

@@ -4,7 +4,7 @@ import Modal from './ui/Modal';
 import { createPortal } from 'react-dom';
 
 
-const BankButton = ({ bank }) => {
+const BankButton = ({ bank, rate }) => {
   const [openModal, open] = useState(false);
   const closeModal = () => open(false);
   
@@ -23,6 +23,7 @@ const BankButton = ({ bank }) => {
         <Modal onClose={closeModal}>
           <CurrencyForm
             bankInfo={bank}
+            rate={rate}
             onClose={() => open(false)}
           />
         </Modal>,

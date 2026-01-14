@@ -31,13 +31,13 @@ function App() {
 
   return (
     <div >
-      {/* <HomeLayout>
+      <HomeLayout>
         <h1>BANK LIST</h1>
         <div id='bank-list'>
         </div>
         <Home bank_list={banks}/>
-      </HomeLayout> */}
-      <CurrencyForm/>
+      </HomeLayout>
+      {/* <CurrencyForm/> */}
       {/* <Modal onClose={()=>open(false)}/> */}
     </div>  
   )

@@ -7,23 +7,33 @@ import CurrencyForm from './components/CurrencyForm'
 const banks = [
   {
     id: 1,
-    title: 'Woori'
+    title: 'Woori',
+    from: "kr",
+    to: "us"
   }, 
   {
     id:2,
-    title: 'Shinhan'
+    title: 'Shinhan',
+    from: "kr",
+    to: "vn"
   },
   { 
     id:3,
-    title: 'KB'
+    title: 'KB',
+    from: "kr",
+    to: "jp"
   },
   {
     id:4,
-    title: 'NH'
+    title: 'NH',
+    from: "kr",
+    to: "cn"
   },
   {
     id:5,
-    title: 'Hana'
+    title: 'Hana',
+    from: "kr",
+    to: "eu"
   } 
 ]
 

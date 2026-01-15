@@ -9,6 +9,13 @@
 
 - 🤖 **오늘 환율에 따른 환율 계산 시스템**
 
+| props | description |
+|------|------|
+| **from** | 송금 통화 국가 코드 |
+| **to** | 수령 통화 국가 코드 |
+| **bgColor** | 컴포넌트의 배경 색상 |
+| **onClose** | 컴포넌트의 닫기 버튼 액션 |
+
 <br/>
 
 ## 🛠 기술 스택
@@ -26,7 +33,6 @@
 ### 사전 요구사항
 
 - Node.js 18 이상
-- ExchangeRate API 키
 
 
 ### 설치 방법
@@ -42,14 +48,6 @@ cd CurrencyCalculatorComponent/currency-calculator
 npm install
 ```
 
-3. **환경 변수 설정**
-```bash
-touch ./.env
-```
-
-* .env 파일에 다음 정보 입력
-`EXCHANGE_RATE_API_KEY={your_exchange_rate_key}`
-
 
 4. **프론트엔드 실행 (새 터미널)**
 ```bash
@@ -64,6 +62,6 @@ http://localhost:5173
 
 | 이름 | 담당 |
 |------|------|
-| **송민혁** | 울랄라 울랄라 |
-| **박주호** | 울랄라 울랄라 |
-| **이유림** | 울랄라 울랄라 |
+| **송민혁** | npm 배포, 내부 API 연동  |
+| **박주호** | 컴포넌트 UI 제작 |
+| **이유림** | 홈 레이아웃, 컴포넌트 모달창 기능 적용 |

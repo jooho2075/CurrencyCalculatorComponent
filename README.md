@@ -16,6 +16,24 @@
 | **bgColor** | 컴포넌트의 배경 색상 |
 | **onClose** | 컴포넌트의 닫기 버튼 액션 |
 
+## 컴포넌트 사용법
+
+```
+import { CurrencyForm } from "woorifisa6-currency-calculator";
+import 'woorifisa6-currency-calculator/styles.css';
+
+function App() {
+  return (
+    <CurrencyForm
+      from="kr"
+      to="us"
+      bgColor="#f0f4f8"
+      onClose={() => console.log("Closed")}
+    />
+  );
+}
+```
+
 <br/>
 
 ## 🛠 기술 스택

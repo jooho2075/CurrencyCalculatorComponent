@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import { BANK_COLOR_CODE } from '../constants/BANK_COOLOR_CODE';
 
 
-const BankButton = ({ bank, rate }) => {
+const BankButton = ({ bank }) => {
   const [openModal, open] = useState(false);
   const closeModal = () => open(false);
   
@@ -25,7 +25,6 @@ const BankButton = ({ bank, rate }) => {
             from={bank.from}
             to={bank.to}
             bgColor={BANK_COLOR_CODE[bank.title]}
-            rate={rate}
             onClose={() => open(false)}
           />
         </Modal>,

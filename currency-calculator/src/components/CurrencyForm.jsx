@@ -1,13 +1,28 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { NATION_CURRENCY_CODE } from "../constants/NATION_CURRENCY_CODE";
 import { NATION_CURRENCY_NAME } from "../constants/NATION_CURRENCY_NAME";
 
-const CurrencyForm =({from, to, onClose, rate, bgColor}) => {
+const CurrencyForm =({from, to, onClose, bgColor}) => {
     // 환율 금액 입력 useState
     const [inputMoney, setInputMoney] = useState('');
     const [fromNation, setFromNation] = useState(from);
     const [toNation, setToNation] = useState(to);
     const [totalMoney, setTotalMoney] = useState(0);
+    const [todayRate, setTodayRate] = useState(null);
+
+    const getTodayCurrency = async() => {
+        const url = "https://open.exchangerate-api.com/v6/latest";
+        const res = await fetch(url);
+        const data = await res.json();
+        return data.rates;
+    }
+    
+    useEffect(() => {
+        getTodayCurrency().then(rates => {
+            setTodayRate(rates);
+        });
+    }, []);
     
     // 환율 금액 핸들링 함수
     const handleInputMoney = (e) => {
@@ -23,8 +38,8 @@ const CurrencyForm =({from, to, onClose, rate, bgColor}) => {
     } 
 
     function changeTotalMoney(value) {
-        const rateFrom = rate[NATION_CURRENCY_CODE[fromNation]];
-        const rateTo = rate[NATION_CURRENCY_CODE[toNation]];
+        const rateFrom = todayRate[NATION_CURRENCY_CODE[fromNation]];
+        const rateTo = todayRate[NATION_CURRENCY_CODE[toNation]];
 
         const exchangeRate = rateTo / rateFrom; // number
         const result = Number(value) * exchangeRate;
@@ -35,6 +50,8 @@ const CurrencyForm =({from, to, onClose, rate, bgColor}) => {
     function getNationEmblem(nationCode) {
         return `https://hatscripts.github.io/circle-flags/flags/${nationCode}.svg`;
     }
+
+    if (!todayRate) return <p>로딩 중...</p>;
 
     return (
         <div className="rounded-2xl min-h-[60vh] flex items-center justify-center p-4"
@@ -55,8 +72,8 @@ const CurrencyForm =({from, to, onClose, rate, bgColor}) => {
                         const newNation = event.target.value;
                         setFromNation(newNation);
                         if (inputMoney) {
-                            const rateFrom = rate[NATION_CURRENCY_CODE[newNation]];
-                            const rateTo = rate[NATION_CURRENCY_CODE[toNation]];
+                            const rateFrom = todayRate[NATION_CURRENCY_CODE[newNation]];
+                            const rateTo = todayRate[NATION_CURRENCY_CODE[toNation]];
                             const exchangeRate = rateTo / rateFrom;
                             setTotalMoney(Number(inputMoney) * exchangeRate);
                         }
@@ -116,8 +133,8 @@ const CurrencyForm =({from, to, onClose, rate, bgColor}) => {
                             const newNation = event.target.value;
                             setToNation(newNation);
                             if (inputMoney) {
-                                const rateFrom = rate[NATION_CURRENCY_CODE[fromNation]];
-                                const rateTo = rate[NATION_CURRENCY_CODE[newNation]];
+                                const rateFrom = todayRate[NATION_CURRENCY_CODE[fromNation]];
+                                const rateTo = todayRate[NATION_CURRENCY_CODE[newNation]];
                                 const exchangeRate = rateTo / rateFrom;
                                 setTotalMoney(Number(inputMoney) * exchangeRate);
                             }
